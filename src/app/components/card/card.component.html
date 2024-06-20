@@ -1,49 +1,18 @@
-<div class="d-flex gap-3">
-  <div class="card mb-3 col-4">
-    <div class="row g-0">
-      <div class="col-md-6">
-        <img src="https://rickandmortyapi.com/api/character/avatar/121.jpeg" class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-6">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-            content.
-            This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
+<div class="card card-width">
+  <div class="row g-0">
+    <div class="col-md-5">
+      <img src="{{character?.image}}" class="img-fluid rounded-start" alt="...">
     </div>
-  </div>
-  <div class="card mb-3 col-4">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="https://rickandmortyapi.com/api/character/avatar/121.jpeg" class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-            content.
-            This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card mb-3 col-4">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="https://rickandmortyapi.com/api/character/avatar/121.jpeg" class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-            content.
-            This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
+    <div class="col-md-7">
+      <div class="card-body d-flex flex-column ps-0">
+        <h5 class="card-title">
+          <a [routerLink]="['/details', character?.id]" routerLinkActive="router-link-active">
+            {{character?.name}}
+          </a>
+        </h5>
+        <p class="card-text mb-1">Status: {{character?.status}} - {{character?.gender}}</p>
+        <p class="card-text lh-sm"><small class="text-muted">Ultima localização:
+            <br>{{character?.location?.name}}</small></p>
       </div>
     </div>
   </div>

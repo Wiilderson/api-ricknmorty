@@ -1,0 +1,21 @@
+<div class="container mt-4 col-md-5">
+  <div class="card card-width">
+    <div class="row g-0">
+      <div class="col-md-6">
+        <img src="{{character.image}}" class="img-fluid rounded-start" alt="{{character.name}}">
+      </div>
+      <div class="col-md-6">
+        <div class="card-body d-flex flex-column ps-0">
+          <h5 class="card-title">
+            {{character.name}}
+          </h5>
+          <p class="card-text mb-1">Status: {{character.status}} - {{character.gender}}</p>
+          <p class="card-text lh-sm"><small class="text-muted">Ultima localização:
+              <br>{{character.location?.name}}</small></p>
+          <p class="card-text"><small class="text-muted" *ngIf="character?.episode">Primeira aparição:
+              <br>{{character.episode[0]}}</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
