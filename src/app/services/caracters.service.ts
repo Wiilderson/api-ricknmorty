@@ -20,4 +20,8 @@ export class CaractersService {
     return this.http.get<any>(urlID);
   }
 
+  searchCharactersByName(query: string): Observable<any> {
+    const urlName = `${this.API}?name=${query}`;
+    return this.http.get<any>(urlName).pipe(map((response) => response.results));
+  }
 }

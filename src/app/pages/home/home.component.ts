@@ -5,6 +5,7 @@ import { CharacterDTO } from '../../dto/character.dto';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../components/header/header.component';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-home',
@@ -18,11 +19,17 @@ export class HomeComponent implements OnInit {
   loading: boolean = false;
   currentPage: number = 1;
   listOfCharacters: CharacterDTO[] = [];
-  constructor(private charService: CaractersService) {
+  constructor(private charService: CaractersService, private searchService: SearchService) {
   }
   ngOnInit(): void {
     this.getCharacters();
-    this.loadAllCharactersOnPage
+    this.loadAllCharactersOnPage();
+
+    this.searchService.search$.subscribe(query => {
+      this.charService.searchCharactersByName(query).subscribe(data => {
+        this.characters = data;
+      });
+    });
   }
   getCharacters() {
     this.charService.getCaracters(this.currentPage).subscribe((response: CharacterDTO[]) => {
@@ -55,4 +62,6 @@ export class HomeComponent implements OnInit {
   //   let filtered = [...this.characters];
   //   this.characters = filtered;
   // }
+
+
 }
