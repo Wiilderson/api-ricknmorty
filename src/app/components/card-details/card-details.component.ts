@@ -3,6 +3,9 @@ import { CharacterDTO } from '../../dto/character.dto';
 import { ActivatedRoute } from '@angular/router';
 import { CaractersService } from '../../services/caracters.service';
 import { CommonModule } from '@angular/common';
+import { EpisodesService } from '../../services/episodes.service';
+import { EpisodeDTO } from '../../dto/episodes.dto';
+import { SharedDataService } from '../../services/shared-data.service';
 
 @Component({
   selector: 'app-card-details',
@@ -12,15 +15,44 @@ import { CommonModule } from '@angular/common';
   styleUrl: './card-details.component.scss'
 })
 export class CardDetailsComponent {
-  public character!: CharacterDTO;
+  public character: CharacterDTO = new CharacterDTO;
+  public episodes: EpisodeDTO = new EpisodeDTO;
+  public dataDetails!: any;
+  public typeDataShared: string = '';
+  public char: boolean = false;
+  public epi: boolean = false;
 
-  constructor(private route: ActivatedRoute, private charService: CaractersService) { }
+  constructor(private route: ActivatedRoute, private charService: CaractersService, private epiService: EpisodesService, private dataShared: SharedDataService) { }
 
   ngOnInit(): void {
+    this.dataShared.condition$.subscribe(condition => {
+      if (condition === "char") {
+        this.char = !this.char
+        this.epi = false;
+        this.characterParamsByID();
+      }
+      if (condition === "epi") {
+        this.epi = !this.epi
+        this.char = false;
+        this.episodesParamsByID();
+      }
+    });
+  }
+
+  characterParamsByID() {
     this.route.params.subscribe(params => {
       const id = Number(params['id']);
       this.charService.getDetailsById(id).subscribe((details: CharacterDTO) => {
         this.character = details
+      })
+    })
+  }
+
+  episodesParamsByID() {
+    this.route.params.subscribe(params => {
+      const id = Number(params['id']);
+      this.epiService.getDetailsEpisodeById(id).subscribe((details: EpisodeDTO) => {
+        this.dataDetails = details
       })
     })
   }

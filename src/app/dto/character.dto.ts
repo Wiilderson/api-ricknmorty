@@ -9,10 +9,10 @@ export class CharacterDTO {
         name: string;
         url: string;
     };
-    location?: {
+    location: {
         name: string;
         url: string;
-    };
+    } | undefined;
     image: string = "";
     episode: string[] = [""];
     url: string = "";
