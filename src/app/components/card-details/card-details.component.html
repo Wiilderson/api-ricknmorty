@@ -10,11 +10,14 @@
             <h5 class="card-title">
               {{character.name}}
             </h5>
-            <p class="card-text mb-1">Status: {{character.status}} - {{character.gender}}</p>
-            <p class="card-text lh-sm"><small class="text-muted">Ultima localização:
-                <br>{{character.location?.name}}</small></p>
-            <p class="card-text"><small class="text-muted" *ngIf="character.episode">Primeira aparição:
-                <br>{{character.episode[0]}}</small></p>
+            <p class="card-text mb-3"><span class="text-one">Status:</span> {{character.status}} - {{character.gender}}
+            </p>
+            <p class="card-text lh-sm text-one mb-0">Ultima localização:</p>
+            <small class="mb-3">
+              {{character.location?.name}}</small>
+            <p class="card-text text-one mb-0">Primeira aparição:</p>
+            <small class="" *ngIf="character.episode">
+              {{character.episode[0]}}</small>
           </div>
         </div>
       </ng-container>
@@ -27,11 +30,11 @@
             <h5 class="card-title">
               {{dataDetails?.name}}
             </h5>
-            <p class="card-text mb-1">Episodio: {{dataDetails?.episode}}</p>
-            <p class="card-text lh-sm"><small class="text-muted">Data exibição:
-                <br>{{dataDetails?.air_date}}</small></p>
-            <p class="card-text"><small class="text-muted">URL:
-                <br>{{dataDetails?.url}}</small></p>
+            <p class="card-text mb-2"><span class="text-one">Episodio:</span> {{dataDetails?.episode}}</p>
+            <p class="card-text lh-sm text-one mb-0">Data exibição:</p>
+            <small class="mb-1">{{dataDetails?.air_date}}</small>
+            <p class="card-text text-one mb-0">URL:</p>
+            <small class="">{{dataDetails?.url}}</small>
           </div>
         </div>
       </ng-container>
