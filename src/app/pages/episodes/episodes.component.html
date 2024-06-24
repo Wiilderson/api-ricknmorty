@@ -1,0 +1,7 @@
+<div class="container-fluid" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="1.5"
+  [infiniteScrollThrottle]="150" (scrolled)="onScrollingScreen()">
+  <div class="d-flex flex-wrap justify-content-center gap-4 mb-3 mt-4">
+    <app-card *ngFor="let episodes of allEpisodes" [data]="episodes"></app-card>
+  </div>
+  <div class="d-flex justify-content-center mb-1" *ngIf="!hasMorePages">Não há mais episodios!</div>
+</div>
