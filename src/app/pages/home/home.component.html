@@ -1,6 +1,6 @@
-<div class="container-fluid" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="1.5"
+<div class="container-fluid mt-4" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="1.5"
   [infiniteScrollThrottle]="150" (scrolled)="onScrollingScreen()">
-  <div class="d-flex flex-wrap justify-content-center gap-4 mb-3 mt-4">
-    <app-card *ngFor="let character of characters" [character]="character"></app-card>
+  <div class="d-flex flex-wrap justify-content-center gap-4 mb-3">
+    <app-card *ngFor="let character of characters" [data]="character"></app-card>
   </div>
 </div>

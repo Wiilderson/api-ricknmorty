@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../components/header/header.component';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { SearchService } from '../../services/search.service';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   loading: boolean = false;
   currentPage: number = 1;
   listOfCharacters: CharacterDTO[] = [];
+  hasMorePages: boolean = false;
   constructor(private charService: CaractersService, private searchService: SearchService) {
   }
   ngOnInit(): void {
@@ -38,16 +40,22 @@ export class HomeComponent implements OnInit {
   }
 
   loadAllCharactersOnPage(): void {
-    console.log('testando')
-    this.loading = true;
-    this.charService
-      .getCaracters(this.currentPage)
+    this.charService.getCaracters(this.currentPage)
+      .pipe(
+        catchError(error => {
+          if (error.status === 404) {
+            this.hasMorePages = false;
+          }
+          this.loading = false;
+          return of([]);
+        })
+      )
       .subscribe((data: CharacterDTO[]) => {
-        this.listOfCharacters = [...this.characters, ...data];
-        this.characters = [...this.listOfCharacters];
+        if (data.length > 0) {
+          this.listOfCharacters = [...this.characters, ...data];
+          this.characters = [...this.listOfCharacters];
+        }
         this.loading = false;
-        //this.listOfCharacters = [...this.listOfCharacters, ...data];
-        //this.applyFilter();
       });
   }
 
@@ -57,11 +65,5 @@ export class HomeComponent implements OnInit {
       this.loadAllCharactersOnPage();
     }
   }
-
-  // applyFilter(): void {
-  //   let filtered = [...this.characters];
-  //   this.characters = filtered;
-  // }
-
 
 }
