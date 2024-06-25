@@ -15,28 +15,29 @@ export type dataParameters = CharacterDTO | EpisodeDTO;
 })
 export class CardComponent {
   @Input() data?: any;
+  @Input() typeOfCard: string = '';
 
   constructor(private dataService: SharedDataService) {
 
   }
   ngOnInit(): void {
-    console.log(this.data);
   }
 
-  sendCharacterData(event: Event) {
+  sendData(event: Event, type: string) {
     event.preventDefault();
-    this.dataService.sendData('char');
-  }
-  sendEpisodeData(event: Event) {
-    event.preventDefault();
-    this.dataService.sendData('epi');
+    this.dataService.sendData(type);
   }
 
-  isCharacter(data: any): data is CharacterDTO {
-    return data && data.status !== undefined;
-  }
-
-  isEpisode(data: any): data is EpisodeDTO {
-    return data && data.air_date !== undefined;
+  isTypeOfCard(type: string): boolean {
+    switch (type) {
+      case 'char':
+        return this.typeOfCard === 'char';
+      case 'loc':
+        return this.typeOfCard === 'loc';
+      case 'epi':
+        return this.typeOfCard === 'epi';
+      default:
+        return false;
+    }
   }
 }

@@ -23,7 +23,7 @@
       </ng-container>
       <ng-container *ngIf="epi === true">
         <div class="col-md-6">
-          <img src="../../../assets/rickmorty.jpg" class="img-fluid img-epi rounded-start" alt="teste">
+          <img src="../../../assets/rickmorty.jpg" class="img-fluid img-epi rounded-start" alt="episodios">
         </div>
         <div class="col-md-6 ps-3">
           <div class="card-body d-flex flex-column ps-0">
@@ -35,6 +35,23 @@
             <small class="mb-1">{{dataDetails?.air_date}}</small>
             <p class="card-text text-one mb-0">URL:</p>
             <small class="">{{dataDetails?.url}}</small>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="loc === true">
+        <div class="col-md-6">
+          <img src="../../../assets/rickmortyplanets.jpg" class="img-fluid img-epi rounded-start" alt="locations">
+        </div>
+        <div class="col-md-6 ps-3">
+          <div class="card-body d-flex flex-column ps-0">
+            <h5 class="card-title">
+              {{locationDetails.name}}
+            </h5>
+            <p class="card-text mb-2"><span class="text-one">Tipo:</span> {{locationDetails.type}}</p>
+            <p class="card-text lh-sm text-one mb-0">Dimensão:</p>
+            <small class="mb-1">{{locationDetails.dimension}}</small>
+            <p class="card-text text-one mb-0">Numero Residentes:</p>
+            <small class="">{{locationDetails.residents.length}}</small>
           </div>
         </div>
       </ng-container>
