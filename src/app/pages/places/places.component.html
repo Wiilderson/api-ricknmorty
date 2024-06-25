@@ -1,0 +1,21 @@
+<div class="container-fluid mt-4" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollUpDistance]="1.5"
+  [infiniteScrollThrottle]="150" (scrolled)="onScrollingScreen()">
+  <div class="d-flex flex-wrap justify-content-center gap-4 mb-3">
+    <app-card *ngFor="let allLocations of locations" [data]="allLocations" [typeOfCard]="typeOfCard"></app-card>
+  </div>
+  <ng-container *ngIf="locations.length === 0">
+    <div class="col-12 d-flex justify-content-center">
+      <div class="card col-md-4">
+        <div class="row g-0">
+          <div class="">
+            <div class="card-body">
+              <p class="card-text mb-1 d-flex justify-content-center">Não foi encontrado</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <div class="d-flex justify-content-center mb-1 text-white" *ngIf="!hasMorePages">Não há mais lugares!
+  </div>
+</div>
