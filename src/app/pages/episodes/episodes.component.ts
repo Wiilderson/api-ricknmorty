@@ -20,16 +20,19 @@ export class EpisodesComponent {
   loading: boolean = false;
   listOfEpisodes: EpisodeDTO[] = [];
   hasMorePages: boolean = true;
+  public typeOfCard: string = 'epi'
   constructor(private episodeService: EpisodesService, private searchService: SearchService) {
   }
 
   ngOnInit(): void {
     this.loadAllEpisodes();
-
+    this.loadAllEpisodesOnPage();
 
     this.searchService.search$.subscribe(query => {
       this.episodeService.searchEpisodesByName(query).subscribe((data: EpisodeDTO[]) => {
         this.allEpisodes = data;
+        console.log(this.allEpisodes);
+        this.hasMorePages = true;
       });
     });
   }

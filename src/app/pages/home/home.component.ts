@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   currentPage: number = 1;
   listOfCharacters: CharacterDTO[] = [];
   hasMorePages: boolean = false;
+  public typeOfCard: string = 'char'
   constructor(private charService: CaractersService, private searchService: SearchService) {
   }
   ngOnInit(): void {
@@ -30,6 +31,7 @@ export class HomeComponent implements OnInit {
     this.searchService.search$.subscribe(query => {
       this.charService.searchCharactersByName(query).subscribe(data => {
         this.characters = data;
+        this.hasMorePages = true;
       });
     });
   }
